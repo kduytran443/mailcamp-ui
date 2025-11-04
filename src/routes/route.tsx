@@ -6,12 +6,12 @@ const SignUpPage = lazy(() => import('@/pages/SignUpPage'));
 const DashboardPage = lazy(() => import('@/pages/DashboardPage'));
 const LoginSuccessPage = lazy(() => import('@/pages/LoginSuccessPage'));
 const ClassIntroPage = lazy(() => import('@/pages/ClassIntroPage'));
-const ClassroomPage = lazy(() => import('@/pages/ClassroomPage'));
+const WorkspacePage = lazy(() => import('@/pages/WorkspacePage'));
 
 export interface AppRoute {
   path: string;
   element: JSX.Element;
-  layout: 'dashboard' | 'none' | 'classroom';
+  layout: 'dashboard' | 'none' | 'workspace';
 }
 
 export const routes: AppRoute[] = [
@@ -41,9 +41,9 @@ export const routes: AppRoute[] = [
     layout: 'dashboard',
   },
   {
-    path: '/classroom',
-    element: <ClassroomPage />,
-    layout: 'classroom',
+    path: '/workspaces/:workspaceId',
+    element: <WorkspacePage />,
+    layout: 'workspace',
   },
   {
     path: '/profile',

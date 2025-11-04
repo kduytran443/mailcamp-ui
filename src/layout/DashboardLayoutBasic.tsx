@@ -154,7 +154,7 @@ export default function DashboardLayoutBasic({ children }: DashboardLayoutBasicP
     <AppProvider
       branding={{
         logo: <img src="https://mui.com/static/logo.png" alt="MUI logo" />,
-        title: 'Mail Camp',
+        title: '',
         homeUrl: '/toolpad/core/introduction',
       }}
       navigation={navigationList}
@@ -171,7 +171,32 @@ export default function DashboardLayoutBasic({ children }: DashboardLayoutBasicP
           },
         }}
       >
-        {children}
+        <Box
+          sx={(theme) => ({
+            display: 'flex',
+            flexDirection: 'column',
+            flex: 1,
+            bgcolor: theme.palette.mode === 'light' ? '#F6F8FB' : '#121212',
+            p: 3,
+          })}
+        >
+          {/* PAGE CONTENT */}
+          <Box sx={{ flex: 1 }}>{children}</Box>
+
+          {/* FOOTER */}
+          <Box
+            sx={{
+              mt: 8,
+              py: 2,
+              textAlign: 'center',
+              color: 'text.secondary',
+              fontSize: 14,
+              borderTop: '1px solid #d0d0d0',
+            }}
+          >
+            © {new Date().getFullYear()} Mail Camp — Built by Hudson
+          </Box>
+        </Box>
       </DashboardLayout>
     </AppProvider>
   );

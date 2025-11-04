@@ -82,32 +82,48 @@ export default function DashboardPage() {
   const totalMembers = workspaces.reduce((sum, w) => sum + 13, 0);
 
   return (
-    <Box sx={{ p: 3, backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
+    <Box>
       {/* Page title + Create workspace button */}
-      <Stack direction="row" justifyContent="space-between" alignItems="center" mb={4}>
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        flexWrap="wrap"
+        rowGap={2}
+        mb={4}
+      >
         <Typography variant="h4" fontWeight="bold">
           Dashboard
         </Typography>
-        <Button variant="contained" onClick={() => setOpenModal(true)}>
+
+        <Button
+          variant="contained"
+          onClick={() => setOpenModal(true)}
+          sx={{ mt: { xs: 2, sm: 0 } }} // trên mobile cách ra chút
+        >
           Create Workspace
         </Button>
-      </Stack>
-
+      </Box>
       {/* Top row: Quick Stats + Campaign Overview */}
       <Grid container spacing={2} mb={4}>
         {/* Quick Stats */}
         <Grid item xs={12} md={4}>
           <Grid container spacing={2}>
             <Grid item xs={6} md={12}>
-              <Card sx={{ height: 120, backgroundColor: '#fff' }}>
+              <Card
+                sx={(theme) => ({ height: 120, backgroundColor: theme.palette.background.paper })}
+              >
                 <CardContent sx={{ textAlign: 'center' }}>
                   <Typography variant="subtitle2">Total Campaigns</Typography>
                   <Typography variant="h6">{totalCampaigns}</Typography>
                 </CardContent>
               </Card>
             </Grid>
+
             <Grid item xs={6} md={12}>
-              <Card sx={{ height: 120, backgroundColor: '#fff' }}>
+              <Card
+                sx={(theme) => ({ height: 120, backgroundColor: theme.palette.background.paper })}
+              >
                 <CardContent sx={{ textAlign: 'center' }}>
                   <Typography variant="subtitle2">Total Members</Typography>
                   <Typography variant="h6">{totalMembers}</Typography>
@@ -119,7 +135,13 @@ export default function DashboardPage() {
 
         {/* Campaign Overview */}
         <Grid item xs={12} md={8}>
-          <Card sx={{ height: 250, p: 2, backgroundColor: '#fff' }}>
+          <Card
+            sx={(theme) => ({
+              height: 250,
+              p: 2,
+              backgroundColor: theme.palette.background.paper,
+            })}
+          >
             <Typography variant="h6" fontWeight="bold" gutterBottom>
               Campaign Overview
             </Typography>
@@ -143,6 +165,7 @@ export default function DashboardPage() {
           : workspaces.map((ws) => (
               <Grid item xs={12} sm={6} md={4} key={ws.id}>
                 <Card
+                  onClick={(e) => navigate(`/workspaces/${ws.id}`)}
                   sx={{
                     cursor: 'pointer',
                     borderRadius: 2,
@@ -164,9 +187,14 @@ export default function DashboardPage() {
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
-                      bgcolor="primary.light"
+                      sx={(theme) => ({
+                        bgcolor:
+                          theme.palette.mode === 'light'
+                            ? theme.palette.grey[200]
+                            : theme.palette.grey[800],
+                      })}
                     >
-                      <WorkspacePremiumIcon sx={{ fontSize: 60, color: 'white' }} />
+                      <WorkspacePremiumIcon sx={{ fontSize: 60 }} />
                     </Box>
                   )}
                   <CardContent>
@@ -209,7 +237,8 @@ export default function DashboardPage() {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 400,
+            maxWidth: 600,
+            width: '90%',
             bgcolor: 'background.paper',
             boxShadow: 24,
             p: 4,
@@ -223,6 +252,7 @@ export default function DashboardPage() {
             <TextField
               label="Workspace Name"
               value={workspaceName}
+              required
               onChange={(e) => setWorkspaceName(e.target.value)}
               fullWidth
             />
@@ -231,6 +261,7 @@ export default function DashboardPage() {
               value={workspaceDescription}
               onChange={(e) => setWorkspaceDescription(e.target.value)}
               fullWidth
+              required
               multiline
               rows={3}
             />
