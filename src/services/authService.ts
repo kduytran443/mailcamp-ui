@@ -9,16 +9,16 @@ export interface LoginDto {
 
 export const AuthService = {
   login: async (data: LoginDto) => {
-    const res = await axios.post(`${API_BASE}/auth/login`, data, { withCredentials: true });
+    const res = await axios.post(`${API_BASE}/api/v1/auth/login`, data, { withCredentials: true });
     return res.data;
   },
 
   getMe: async () => {
-    const res = await axios.get(`${API_BASE}/users/me`, { withCredentials: true });
+    const res = await axios.get(`${API_BASE}/api/v1/users/me`, { withCredentials: true });
     return res.data;
   },
 
   logout: async () => {
-    await axios.post(`${API_BASE}/auth/logout`, {}, { withCredentials: true });
+    await axios.post(`${API_BASE}/api/v1/auth/logout`, {}, { withCredentials: true });
   },
 };

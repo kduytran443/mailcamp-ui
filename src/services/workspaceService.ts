@@ -12,7 +12,7 @@ export const WorkspaceService = {
    * GET /workspaces
    */
   getMyWorkspaces: async (page = 1, limit = 10): Promise<PaginatedResult<Workspace>> => {
-    const { data } = await api.get('/workspaces', {
+    const { data } = await api.get('/api/v1/workspaces', {
       params: { page, limit },
     });
 
@@ -24,7 +24,7 @@ export const WorkspaceService = {
    * GET /workspaces/:id
    */
   getWorkspaceById: async (id: string): Promise<Workspace> => {
-    const { data } = await api.get(`/workspaces/${id}`);
+    const { data } = await api.get(`/api/v1/workspaces/${id}`);
     return data;
   },
 
@@ -34,7 +34,7 @@ export const WorkspaceService = {
    * POST /workspaces
    */
   createWorkspace: async (payload: CreateWorkspacePayload): Promise<Workspace> => {
-    const { data } = await api.post('/workspaces', payload);
+    const { data } = await api.post('/api/v1/workspaces', payload);
     return data;
   },
 
@@ -43,7 +43,7 @@ export const WorkspaceService = {
    * PUT /workspaces/:id
    */
   updateWorkspace: async (id: string, payload: UpdateWorkspacePayload): Promise<Workspace> => {
-    const { data } = await api.put(`/workspaces/${id}`, payload);
+    const { data } = await api.put(`/api/v1/workspaces/${id}`, payload);
     return data;
   },
 
@@ -52,7 +52,7 @@ export const WorkspaceService = {
    * DELETE /workspaces/:id
    */
   deleteWorkspace: async (id: string): Promise<{ message: string }> => {
-    const { data } = await api.delete(`/workspaces/${id}`);
+    const { data } = await api.delete(`/api/v1/workspaces/${id}`);
     return data;
   },
 };

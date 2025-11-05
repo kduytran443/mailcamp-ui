@@ -1,7 +1,7 @@
 import { useEffect, ReactNode, useState } from 'react';
 import { CircularProgress, Box } from '@mui/material';
 import { useAuthStore } from '@/stores/useAuthStore';
-import { api } from '@/api/axios';
+import { AuthService } from '@/services/authService';
 
 interface AppInitializerProps {
   children: ReactNode;
@@ -15,7 +15,7 @@ export function AppInitializer({ children }: AppInitializerProps) {
   useEffect(() => {
     async function fetchCurrentUser() {
       try {
-        const res = await api.get('/users/me');
+        const res = await AuthService.getMe();
         setUser(res.data);
       } catch (err) {
         logout();
